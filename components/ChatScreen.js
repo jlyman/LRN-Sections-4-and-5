@@ -5,6 +5,7 @@ import {
 	TextInput,
 	TouchableOpacity,
 	StyleSheet,
+	Platform,
 } from 'react-native'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 
@@ -20,6 +21,8 @@ const ChatScreen = (props) => {
 
 	const bubbles = messages.map((m, i) => <MessageBubble {...m} key={i} />)
 
+	const spacer = Platform.OS === 'ios' ? <KeyboardSpacer /> : null
+
 	return (
 		<View behavior="padding" style={styles.container}>
 			<View style={styles.bubbleContainer}>
@@ -34,7 +37,7 @@ const ChatScreen = (props) => {
 				</TouchableOpacity>
 			</View>
 
-			<KeyboardSpacer />
+			{spacer}
 		</View>
 	)
 }
