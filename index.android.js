@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
-import App from './components/App'
+import AppContainer from './containers/AppContainer'
 import chatNowReducers from './reducers'
 
 let store = createStore(chatNowReducers, applyMiddleware(thunk))
@@ -16,7 +16,7 @@ class ChatNow extends Component {
 	render() {
 		return (
 			<Provider store={store}>
-				<App />
+				<AppContainer />
 			</Provider>
 
 		)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
 	Navigator,
 	Platform,
@@ -24,6 +24,7 @@ class App extends Component {
 		getCustomerInfo()
 			.then(data => {
 				console.log('Going to restore from storage:', data)
+				this.props.onRehydrateFromLocalStorage(data.name, data.accountNumber)
 			})
 	}
 
@@ -58,6 +59,12 @@ class App extends Component {
 			/>
 		)
 	}
+}
+
+App.propTypes = {
+	name: PropTypes.string,
+	accountNumber: PropTypes.string,
+	onRehydrateFromLocalStorage: PropTypes.func.isRequired,
 }
 
 const styles = StyleSheet.create({
