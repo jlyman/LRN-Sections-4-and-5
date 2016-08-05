@@ -6,7 +6,12 @@ import {
 	TouchableOpacity,
 	Linking,
 	StyleSheet,
+	AsyncStorage,
 } from 'react-native'
+
+const storageNameKey = '@ChatNow:name'
+const storageAccountNumKey = '@ChatNow:accountNum'
+
 
 const SignInScreen = (props) => (
 	<View style={styles.container}>
@@ -28,7 +33,7 @@ const SignInScreen = (props) => (
 
 			<TouchableOpacity
 				style={styles.actionButton}
-				onPress={() => { goPressHandler(props.navHandler) }}
+				onPress={() => { goPressHandler(props.navHandler, props.name, props.accountNumber) }}
 			>
 				<Text style={styles.actionButtonText}>Go</Text>
 			</TouchableOpacity>
@@ -51,8 +56,16 @@ SignInScreen.propTypes = {
 	navHandler: PropTypes.func.isRequired,
 }
 
-function goPressHandler(navHandler) {
-	navHandler()
+function goPressHandler(navHandler, name, accountNum) {
+	AsyncStorage.multiSet([
+		[storageNameKey, name],
+		[storageAccountNumKey, accountNum],
+	])
+		.then(() => navHandler())
+		.catch(ex => {
+			console.log('Error storing customer name and account, proceeding anyway. Details:', ex)
+			navHandler()
+		})
 }
 
 function openHelpPage() {
