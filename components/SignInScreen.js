@@ -6,11 +6,9 @@ import {
 	TouchableOpacity,
 	Linking,
 	StyleSheet,
-	AsyncStorage,
 } from 'react-native'
 
-const storageNameKey = '@ChatNow:name'
-const storageAccountNumKey = '@ChatNow:accountNum'
+import { setCustomerInfo } from '../storageManager'
 
 
 const SignInScreen = (props) => (
@@ -57,10 +55,7 @@ SignInScreen.propTypes = {
 }
 
 function goPressHandler(navHandler, name, accountNum) {
-	AsyncStorage.multiSet([
-		[storageNameKey, name],
-		[storageAccountNumKey, accountNum],
-	])
+	setCustomerInfo(name, accountNum)
 		.then(() => navHandler())
 		.catch(ex => {
 			console.log('Error storing customer name and account, proceeding anyway. Details:', ex)
