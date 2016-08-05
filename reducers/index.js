@@ -22,6 +22,8 @@ function composingMessage(state = '', action) {
 	switch (action.type) {
 	case 'UPDATE_COMPOSE_MESSAGE':
 		return action.message
+	case 'SEND_MESSAGE':
+		return ''
 	default:
 		return state
 	}
@@ -29,6 +31,11 @@ function composingMessage(state = '', action) {
 
 function messages(state = [], action) {
 	switch (action.type) {
+	case 'SEND_MESSAGE':
+		return [
+			...state,
+			{ message: action.message, timestamp: action.timestamp, isOwnMessage: true },
+		]
 	default:
 		return state
 	}
