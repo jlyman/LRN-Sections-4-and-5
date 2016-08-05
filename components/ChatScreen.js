@@ -13,13 +13,7 @@ import MessageBubble from './MessageBubble'
 
 
 const ChatScreen = (props) => {
-	const messages = [
-		{ isOwnMessage: false, message: 'Hi, I\'m Alice. How can I help you today?' },
-		{ isOwnMessage: true, message: 'Hello Alice, I wanted to upgrade to the next tier of service.' },
-		{ isOwnMessage: false, message: 'Sure thing! I can definitely help you out with that.' },
-	]
-
-	const bubbles = messages.map((m, i) => <MessageBubble {...m} key={i} />)
+	const bubbles = props.messages.map((m, i) => <MessageBubble {...m} key={i} />)
 
 	const spacer = Platform.OS === 'ios' ? <KeyboardSpacer /> : null
 
@@ -33,11 +27,12 @@ const ChatScreen = (props) => {
 				<TextInput
 					value={props.composingMessage}
 					onChangeText={props.onComposeMessageUpdate}
+					onSubmitEditing={props.onSendMessage}
 					returnKeyType="send"
 					style={styles.messageBox}
 				/>
 
-				<TouchableOpacity>
+				<TouchableOpacity onPress={props.onSendMessage}>
 					<Text style={styles.sendButton}>Send</Text>
 				</TouchableOpacity>
 			</View>
@@ -48,8 +43,10 @@ const ChatScreen = (props) => {
 }
 
 ChatScreen.propTypes = {
+	messages: PropTypes.array.isRequired,
 	composingMessage: PropTypes.string,
 	onComposeMessageUpdate: PropTypes.func.isRequired,
+	onSendMessage: PropTypes.func.isRequired,
 }
 
 
