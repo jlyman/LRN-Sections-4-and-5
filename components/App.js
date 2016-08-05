@@ -16,7 +16,7 @@ class App extends Component {
 	_renderScene(route, navigator) {
 		switch (route.name) {
 		case 'SignInScreen':
-			return <SignInContainer />
+			return <SignInContainer navHandler={() => { navigator.push(routes.chat) }} />
 		case 'ChatScreen':
 			return <ChatContainer />
 		case 'MainScreen':
@@ -33,7 +33,7 @@ class App extends Component {
 	render() {
 		return (
 			<Navigator
-				initialRoute={routes.chat}
+				initialRoute={routes.main}
 				renderScene={this._renderScene}
 				style={styles.container}
 				sceneStyle={styles.sceneContainer}

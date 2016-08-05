@@ -4,10 +4,11 @@ import { updateName, updateAccountNumber } from '../actions'
 import SignInScreen from '../components/SignInScreen'
 
 
-const mapStateToProps = (state) => (
+const mapStateToProps = (state, props) => (
 	{
 		name: state.name,
 		accountNumber: state.accountNumber,
+		navHandler: props.navHandler,
 	}
 )
 

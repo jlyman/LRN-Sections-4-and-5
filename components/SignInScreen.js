@@ -26,7 +26,10 @@ const SignInScreen = (props) => (
 				onChangeText={props.onAccountNumberUpdate}
 			/>
 
-			<TouchableOpacity style={styles.actionButton}>
+			<TouchableOpacity
+				style={styles.actionButton}
+				onPress={() => { goPressHandler(props.navHandler) }}
+			>
 				<Text style={styles.actionButtonText}>Go</Text>
 			</TouchableOpacity>
 		</View>
@@ -45,6 +48,11 @@ SignInScreen.propTypes = {
 	accountNumber: PropTypes.string,
 	onNameUpdate: PropTypes.func.isRequired,
 	onAccountNumberUpdate: PropTypes.func.isRequired,
+	navHandler: PropTypes.func.isRequired,
+}
+
+function goPressHandler(navHandler) {
+	navHandler()
 }
 
 function openHelpPage() {
