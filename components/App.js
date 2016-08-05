@@ -16,7 +16,12 @@ class App extends Component {
 			return <SignInScreen />
 		case 'MainScreen':
 		default:
-			return <MainScreen />
+			return (
+				<MainScreen
+					getHelpPressHandler={() => {
+						navigator.push(routes.signIn)
+					}}
+				/>)
 		}
 	}
 
