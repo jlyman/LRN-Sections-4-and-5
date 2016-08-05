@@ -17,7 +17,17 @@ const NavBarRouteMapper = {
 			</TouchableOpacity>
 		)
 	},
-	RightButton: (route, navigator, index, navState) => {},
+	RightButton: (route, navigator, index, navState) => {
+		if (route.name === 'ChatScreen') {
+			return (
+				<TouchableOpacity onPress={() => { navigator.popToTop() }}>
+					<Text style={[styles.navText, styles.rightButtonText]}>Done</Text>
+				</TouchableOpacity>
+			)
+		}
+
+		return null
+	},
 	Title: (route, navigator, index, navState) => (
 		<Text style={styles.navText}>
 			{(route.title ? route.title : route.name).toUpperCase()}
