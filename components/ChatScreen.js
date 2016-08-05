@@ -6,6 +6,7 @@ import {
 	TouchableOpacity,
 	StyleSheet,
 } from 'react-native'
+import KeyboardSpacer from 'react-native-keyboard-spacer'
 
 import MessageBubble from './MessageBubble'
 
@@ -32,6 +33,8 @@ const ChatScreen = (props) => {
 					<Text style={styles.sendButton}>Send</Text>
 				</TouchableOpacity>
 			</View>
+
+			<KeyboardSpacer />
 		</View>
 	)
 }
