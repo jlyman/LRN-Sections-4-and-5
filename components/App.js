@@ -23,8 +23,10 @@ class App extends Component {
 	componentDidMount() {
 		getCustomerInfo()
 			.then(data => {
-				console.log('Going to restore from storage:', data)
-				this.props.onRehydrateFromLocalStorage(data.name, data.accountNumber)
+				if (data.name && data.accountNumber) {
+					console.log('Going to restore from storage:', data)
+					this.props.onRehydrateFromLocalStorage(data.name, data.accountNumber)
+				}
 			})
 	}
 
@@ -36,12 +38,11 @@ class App extends Component {
 			return <ChatContainer />
 		case 'MainScreen':
 		default:
-			return (
-				<MainScreen
-					getHelpPressHandler={() => {
-						navigator.push(routes.signIn)
-					}}
-				/>)
+			if (this.props.name.length && this.props.accountNumber.length) {
+				return <MainScreen getHelpPressHandler={() => navigator.push(routes.chat)} />
+			}
+
+			return <MainScreen getHelpPressHandler={() => navigator.push(routes.signIn)} />
 		}
 	}
 

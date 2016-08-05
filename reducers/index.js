@@ -4,8 +4,10 @@ function name(state = '', action) {
 	switch (action.type) {
 	case 'UPDATE_NAME':
 	case 'REHYDRATE_CUSTOMER_DETAILS':
+		console.log('Setting name to :', action.name)
 		return action.name
 	default:
+		console.log('Returning default state:', state)
 		return state
 	}
 }
