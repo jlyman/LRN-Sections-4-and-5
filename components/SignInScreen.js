@@ -2,6 +2,7 @@ import React from 'react'
 import {
 	View,
 	Text,
+	TextInput,
 	TouchableOpacity,
 	StyleSheet,
 } from 'react-native'
@@ -10,8 +11,10 @@ const SignInScreen = (props) => (
 	<View style={styles.container}>
 		<View style={styles.formContainer}>
 			<Text style={styles.label}>My Name:</Text>
+			<TextInput style={styles.textbox} />
 
 			<Text style={styles.label}>My Account Number:</Text>
+			<TextInput style={styles.textbox} keyboardType="numeric" />
 
 			<TouchableOpacity style={styles.actionButton}>
 				<Text style={styles.actionButtonText}>Go</Text>
@@ -38,6 +41,16 @@ const styles = StyleSheet.create({
 		marginBottom: 6,
 		color: '#ffffff',
 		fontWeight: 'bold',
+	},
+	textbox: {
+		height: 40,
+		width: 300,
+		color: '#4ba3c9',
+		borderWidth: 2,
+		borderColor: '#4d96b5',
+		borderRadius: 6,
+		backgroundColor: '#ffffff',
+		paddingHorizontal: 5,
 	},
 	actionButton: {
 		marginTop: 36,
