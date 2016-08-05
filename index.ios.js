@@ -4,11 +4,12 @@ import {
 } from 'react-native'
 
 import MainScreen from './components/MainScreen'
+import SignInScreen from './components/SignInScreen'
 
 class ChatNow extends Component {
 	render() {
 		return (
-			<MainScreen />
+			<SignInScreen />
 		)
 	}
 }
