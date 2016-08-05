@@ -36,6 +36,11 @@ function messages(state = [], action) {
 			...state,
 			{ message: action.message, timestamp: action.timestamp, isOwnMessage: true },
 		]
+	case 'RECEIVED_MESSAGE':
+		return [
+			...state,
+			action.message,
+		]
 	default:
 		return state
 	}
