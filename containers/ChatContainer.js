@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { updateComposeMessage, sendMessage } from '../actions'
+import { updateComposeMessage, sendMessage, receivedMessage } from '../actions'
 import ChatScreen from '../components/ChatScreen'
 
 
@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => (
 		},
 		onSendMessage: () => {
 			dispatch(sendMessage(new Date()))
+		},
+		onReceivedMessage: (message) => {
+			dispatch(receivedMessage(message))
 		},
 	}
 )

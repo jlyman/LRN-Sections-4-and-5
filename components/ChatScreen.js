@@ -59,6 +59,7 @@ ChatScreen.propTypes = {
 	composingMessage: PropTypes.string,
 	onComposeMessageUpdate: PropTypes.func.isRequired,
 	onSendMessage: PropTypes.func.isRequired,
+	onReceivedMessage: PropTypes.func.isRequired,
 }
 
 
