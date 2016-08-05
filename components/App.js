@@ -10,9 +10,23 @@ import MainScreen from './MainScreen'
 import SignInContainer from '../containers/SignInContainer'
 import ChatContainer from '../containers/ChatContainer'
 import NavBarRouteMapper from './NavBarRouteMapper'
+import { getCustomerInfo } from '../storageManager'
 
 
 class App extends Component {
+	constructor(props) {
+		super(props)
+
+		this._renderScene = this._renderScene.bind(this)
+	}
+
+	componentDidMount() {
+		getCustomerInfo()
+			.then(data => {
+				console.log('Going to restore from storage:', data)
+			})
+	}
+
 	_renderScene(route, navigator) {
 		switch (route.name) {
 		case 'SignInScreen':
