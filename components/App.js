@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import {
 	Navigator,
+	Platform,
 	StyleSheet,
 } from 'react-native'
 
 import routes from '../routes'
 import MainScreen from './MainScreen'
 import SignInScreen from './SignInScreen'
+import NavBarRouteMapper from './NavBarRouteMapper'
 
 
 class App extends Component {
@@ -32,6 +34,10 @@ class App extends Component {
 				renderScene={this._renderScene}
 				style={styles.container}
 				sceneStyle={styles.sceneContainer}
+				navigationBar={<Navigator.NavigationBar
+					routeMapper={NavBarRouteMapper}
+					style={styles.navBar}
+				/>}
 			/>
 		)
 	}
@@ -45,6 +51,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'stretch',
+		marginTop: Platform.OS === 'ios' ? 64 : 56,
+	},
+	navBar: {
+		backgroundColor: '#efefef',
+		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderBottomColor: '#494949',
 	},
 })
 
