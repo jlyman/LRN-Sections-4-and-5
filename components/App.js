@@ -4,6 +4,7 @@ import {
 	StyleSheet,
 } from 'react-native'
 
+import routes from '../routes'
 import MainScreen from './MainScreen'
 import SignInScreen from './SignInScreen'
 
@@ -22,7 +23,7 @@ class App extends Component {
 	render() {
 		return (
 			<Navigator
-				initialRoute={{ name: 'MainScreen', title: 'Welcome' }}
+				initialRoute={routes.main}
 				renderScene={this._renderScene}
 				style={styles.container}
 				sceneStyle={styles.sceneContainer}
