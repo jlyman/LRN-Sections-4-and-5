@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import {
 	View,
 	Text,
@@ -12,10 +12,19 @@ const SignInScreen = (props) => (
 	<View style={styles.container}>
 		<View style={styles.formContainer}>
 			<Text style={styles.label}>My Name:</Text>
-			<TextInput style={styles.textbox} />
+			<TextInput
+				style={styles.textbox}
+				value={props.name}
+				onChangeText={props.onNameUpdate}
+			/>
 
 			<Text style={styles.label}>My Account Number:</Text>
-			<TextInput style={styles.textbox} keyboardType="numeric" />
+			<TextInput
+				style={styles.textbox}
+				value={props.accountNumber}
+				keyboardType="numeric"
+				onChangeText={props.onAccountNumberUpdate}
+			/>
 
 			<TouchableOpacity style={styles.actionButton}>
 				<Text style={styles.actionButtonText}>Go</Text>
@@ -30,6 +39,13 @@ const SignInScreen = (props) => (
 		</Text>
 	</View>
 )
+
+SignInScreen.propTypes = {
+	name: PropTypes.string,
+	accountNumber: PropTypes.string,
+	onNameUpdate: PropTypes.func.isRequired,
+	onAccountNumberUpdate: PropTypes.func.isRequired,
+}
 
 function openHelpPage() {
 	Linking.openURL('https://www.google.com/')
