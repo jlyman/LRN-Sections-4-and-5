@@ -12,6 +12,14 @@ export function updateAccountNumber(number) {
 	}
 }
 
+export function rehydrateNameAndAccountNum(name, accountNumber) {
+	return {
+		type: 'REHYDRATE_CUSTOMER_DETAILS',
+		name,
+		number: accountNumber,
+	}
+}
+
 export function updateComposeMessage(message) {
 	return {
 		type: 'UPDATE_COMPOSE_MESSAGE',
