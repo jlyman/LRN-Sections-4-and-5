@@ -1,0 +1,95 @@
+{
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+        "mocha": true
+    },
+    "plugins": [
+        "react-native"
+    ],
+    "ecmaFeatures": {
+        "spread": true,
+        "restParams": true,
+    },
+    "rules": {
+        // Enable React Native rules
+        "react-native/no-unused-styles": 1,
+        "react-native/split-platform-components": 2,
+
+        // === Overrides from AirBnB rules ===
+        
+        // Tabs all the way. Cue religious wars.
+        "indent": [
+            1,
+            "tab"
+        ],
+        "linebreak-style": [
+            1,
+            "unix"
+        ],
+        "semi": [
+            2,
+            "never"
+        ],
+        // I'm not bothered by this. Justification is that it might make whitespace differences in diffs, but hey. So warn.
+        "no-trailing-spaces": 1,
+        // New string templates are good, but are not required. More like... guidelines.
+        "prefer-template": 1,
+        "max-len": [
+            1,
+            {
+                "code": 120, 
+                "tabWidth": 4, 
+                "ignoreUrls": true
+            }
+        ],
+        "new-cap": [
+            2,
+            {
+                "capIsNewExceptions": [
+                    "Immutable.Map",
+                    "Immutable.List",
+                    "Immutable.Record",
+                    "Immutable.OrderedMap",
+                    "Immutable.OrderedList",
+                    "Immutable.Set",
+                    "Immutable.Stack"
+                ]
+            }
+        ],
+        "no-unused-vars": [
+            1,
+            // Ignore the React variable because we nearly always 
+            // need to include it but don't invoke it directly.
+            { "varsIgnorePattern": "^React$" }
+        ],
+
+        // Disable because we aren't going to be using vars, and will often have 
+        // elements like "const style = ..." that can legitimately go at the bottom.
+        "no-use-before-define": 0,
+
+        "no-underscore-dangle": 0,
+
+        // "react/jsx-closing-bracket-location": [
+        //     1,
+        //     "props-aligned"
+        // ],
+        "react/jsx-indent": [
+            1, 
+            "tab"
+        ],
+
+        "react/jsx-indent-props": [
+            1, 
+            "tab"
+        ],
+
+        "react/jsx-curly-spacing": 1,
+
+        // The following is temporary. If we determine that we need better performance, re-enable this as a warning
+        "react/jsx-no-bind": [
+            1,
+            "allowArrowFunctions": true
+        ]
+    },
+}
