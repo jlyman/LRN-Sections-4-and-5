@@ -20,6 +20,8 @@ function accountNumber(state = '', action) {
 
 function composingMessage(state = '', action) {
 	switch (action.type) {
+	case 'UPDATE_COMPOSE_MESSAGE':
+		return action.message
 	default:
 		return state
 	}
