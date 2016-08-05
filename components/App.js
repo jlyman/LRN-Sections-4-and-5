@@ -8,7 +8,7 @@ import {
 import routes from '../routes'
 import MainScreen from './MainScreen'
 import SignInContainer from '../containers/SignInContainer'
-import ChatScreen from './ChatScreen'
+import ChatContainer from '../containers/ChatContainer'
 import NavBarRouteMapper from './NavBarRouteMapper'
 
 
@@ -18,7 +18,7 @@ class App extends Component {
 		case 'SignInScreen':
 			return <SignInContainer />
 		case 'ChatScreen':
-			return <ChatScreen />
+			return <ChatContainer />
 		case 'MainScreen':
 		default:
 			return (
