@@ -3,13 +3,13 @@ import {
 	AppRegistry,
 } from 'react-native'
 
-import MainScreen from './components/MainScreen'
-import SignInScreen from './components/SignInScreen'
+import App from './components/App'
+
 
 class ChatNow extends Component {
 	render() {
 		return (
-			<SignInScreen />
+			<App />
 		)
 	}
 }
