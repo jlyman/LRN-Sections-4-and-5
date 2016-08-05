@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
 	View,
 	Text,
@@ -14,44 +14,71 @@ import MessageBubble from './MessageBubble'
 
 let scrollHeight
 let scrollWindow
+let apiPollIntervalId
 
-const ChatScreen = (props) => {
-	const bubbles = props.messages.map((m, i) => <MessageBubble {...m} key={i} />)
+class ChatScreen extends Component {
+	constructor(props) {
+		super(props)
 
-	const spacer = Platform.OS === 'ios' ? <KeyboardSpacer /> : null
+		this._fetchResponses = this._fetchResponses.bind(this)
+	}
 
-	return (
-		<View behavior="padding" style={styles.container}>
-			<ScrollView
-				style={styles.bubbleContainer}
-				ref={(scrollView) => { scrollWindow = scrollView }}
-				onLayout={event => {
-					scrollHeight = event.nativeEvent.layout.height
-				}}
-				onContentSizeChange={(width, height) => {
-					if (scrollHeight < height) scrollWindow.scrollTo({ y: height - scrollHeight })
-				}}
-			>
-				{bubbles}
-			</ScrollView>
+	componentDidMount() {
+		apiPollIntervalId = setInterval(this._fetchResponses, 5000)
+	}
 
-			<View style={styles.messageBoxContainer}>
-				<TextInput
-					value={props.composingMessage}
-					onChangeText={props.onComposeMessageUpdate}
-					onSubmitEditing={props.onSendMessage}
-					returnKeyType="send"
-					style={styles.messageBox}
-				/>
+	componentWillUnmount() {
+		clearInterval(apiPollIntervalId)
+	}
 
-				<TouchableOpacity onPress={props.onSendMessage}>
-					<Text style={styles.sendButton}>Send</Text>
-				</TouchableOpacity>
+	_fetchResponses() {
+		fetch('http://localhost:8080/messages')
+			.then(response => response.json())
+			.then(data => {
+				if (data && data.message) {
+					this.props.onReceivedMessage(data)
+				}
+			})
+	}
+
+	render() {
+		const bubbles = this.props.messages.map((m, i) => <MessageBubble {...m} key={i} />)
+
+		const spacer = Platform.OS === 'ios' ? <KeyboardSpacer /> : null
+
+		return (
+			<View behavior="padding" style={styles.container}>
+				<ScrollView
+					style={styles.bubbleContainer}
+					ref={(scrollView) => { scrollWindow = scrollView }}
+					onLayout={event => {
+						scrollHeight = event.nativeEvent.layout.height
+					}}
+					onContentSizeChange={(width, height) => {
+						if (scrollHeight < height) scrollWindow.scrollTo({ y: height - scrollHeight })
+					}}
+				>
+					{bubbles}
+				</ScrollView>
+
+				<View style={styles.messageBoxContainer}>
+					<TextInput
+						value={this.props.composingMessage}
+						onChangeText={this.props.onComposeMessageUpdate}
+						onSubmitEditing={this.props.onSendMessage}
+						returnKeyType="send"
+						style={styles.messageBox}
+					/>
+
+					<TouchableOpacity onPress={this.props.onSendMessage}>
+						<Text style={styles.sendButton}>Send</Text>
+					</TouchableOpacity>
+				</View>
+
+				{spacer}
 			</View>
-
-			{spacer}
-		</View>
-	)
+		)
+	}
 }
 
 ChatScreen.propTypes = {
